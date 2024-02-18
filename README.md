@@ -52,19 +52,19 @@ Insert the following at the end of the `<body>` tag:
 
   (...)
 
-	<script type="module">
-		// alpinejs-web-components
-		import AlpineWebComponent from '/dist/esm.min.js';
+  <script type="module">
+    // alpinejs-web-components
+    import AlpineWebComponent from '/dist/esm.min.js';
 
-		// AlpineJS Core
-		import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/+esm';
+    // AlpineJS Core
+    import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/+esm';
 
-		// add AlpineJS to window object
-		window.Alpine = Alpine;
+    // add AlpineJS to window object
+    window.Alpine = Alpine;
 
-		// Start AlpineJS
-		Alpine.start();
-	</script>
+    // Start AlpineJS
+    Alpine.start();
+  </script>
 </body>
 ```
 
