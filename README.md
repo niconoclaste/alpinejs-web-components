@@ -36,7 +36,7 @@ Insert the following at the end of the `<head>` tag:
   (...)
 
   <!-- alpinejs-web-components  -->
-  <script src="/dist/cdn.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs-web-components/dist/cdn.min.js"></script>
   
   <!-- AlpineJS Core -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -54,7 +54,7 @@ Insert the following at the end of the `<body>` tag:
 
   <script type="module">
     // alpinejs-web-components
-    import AlpineWebComponent from '/dist/esm.min.js';
+    import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/dist/esm.min.js';
 
     // AlpineJS Core
     import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/+esm';
