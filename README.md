@@ -21,7 +21,7 @@ This package is not able to do much more than what AlpineJS and webComponents AP
 
 Not using a build phase means that everything is done browser side, which may leads to flash rendering effects and layout shifts.
 
-This package does not pretend to be a replacement for JS frameworks and if you already use a build phase, a server side technology, a static site generator or HTMX in you project, it makes litereally no sense to use this package.
+This package does not pretend to be a replacement for JS frameworks and if you already use a build phase, a server side technology, a static site generator or HTMX in you project, it makes literally no sense to use this package.
 
 <a name="installation"></a>
 ## Installation
