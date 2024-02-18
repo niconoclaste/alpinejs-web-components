@@ -1,0 +1,34 @@
+<nav x-data>
+	<ul>
+		<li><a href="/" :class="current === 'top' ? 'current' : ''">TOP</a></li>
+		<li><a href="/shadow/" :class="current === 'shadow' ? 'current' : ''">SHADOW (esm)</a></li>
+		<li><a href="/no-shadow/" :class="current === 'no-shadow' ? 'current' : ''">WITHOUT SHADOW (esm)</a></li>
+		<li><a href="/layout/" :class="current === 'layout' ? 'current' : ''">LAYOUT</a></li>
+		<li><a href="/layout-esm/" :class="current === 'layout-esm' ? 'current' : ''">LAYOUT (esm)</a></li>
+		<li><a href="/layout-no-shadow/" :class="current === 'layout-no-shadow' ? 'current' : ''">LAYOUT WITHOUT SHADOW (esm)</a></li>
+		<li><a href="/spa/" :class="current === 'spa' ? 'current' : ''">SPA (esm)</a></li>
+		<li><a href="/swiper/" :class="current === 'swiper' ? 'current' : ''">SWIPER (esm)</a></li>
+	</ul>
+</nav>
+
+<style>
+:host {
+	display: block;
+}
+ul {
+	list-style: none;
+	display: inline-flex;
+	gap: 20px;
+	li {
+		a {
+			color: inherit;
+		}
+	}
+}
+.current {
+	pointer-events: none;
+	text-decoration: none;
+	opacity: 0.5;
+}
+
+</style>

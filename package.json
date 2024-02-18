@@ -1,0 +1,24 @@
+{
+  "name": "alpinejs-web-components",
+  "version": "0.1.0",
+  "description": "Use native webcomponents with AlpineJS",
+  "keywords": ["alpine.js", "alpinejs", "webcomponents", "web compontents"],
+  "main": "dist/cjs.js",
+  "module": "dist/esm.js",
+  "unpkg": "dist/cdn.js",
+  "author": "NicoNoClaste",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/niconoclaste/alpinejs-web-components"
+  },
+  "dependencies": {
+    "esbuild": "^0.12.22",
+    "light-server": "latest"
+  },
+  "scripts": {
+    "build": "node scripts/build.js",
+		"dev": "light-server -s examples -q -p 4000 -w \"examples/**/**.js, examples/**/**.html, examples/**/**.css\" -o",
+    "start": "npm run build && light-server -s examples -q -o"
+  }
+}

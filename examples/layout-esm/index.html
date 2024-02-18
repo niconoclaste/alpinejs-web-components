@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alpinejs import webcomponents</title>
+
+
+	<script type="module">
+    // Import alpinejs-web-components
+		import { AlpineWebComponent } from '/dist/esm.min.js';
+
+    // Define layout
+    AlpineWebComponent('alpine-layout', '/_layouts/Layout.html');
+    
+    // Define components
+    AlpineWebComponent('alpine-header', '/_components/Header.html');
+    AlpineWebComponent('alpine-nav', '/_components/Navigation.html');
+    AlpineWebComponent('alpine-button', '/_components/Button.html');
+    AlpineWebComponent('alpine-footer', '/_components/Footer.html');
+	</script>
+
+  <style>
+    button {
+      background-color: green;
+    }
+  </style>
+</head>
+
+<body x-data="{ number: $persist(0), title: 'LAYOUT (esm)', current: 'layout-esm'}" x-cloak>
+  <alpine-layout>
+    <template slot="layout">
+      <p>aaaaa</p>
+
+      <alpine-button shadow @foo="alert('foo event dispatched to parent with shadow')"></alpine-button>
+
+    </template>
+
+  </alpine-layout>
+
+
+
+
+
+
+
+<script type="module">
+  // Import Alpine Plugins
+	import { persist } from 'https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/+esm';
+
+  // Import Alpine Core
+	import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/+esm';
+
+  // Init and Start Alpine
+	window.Alpine = Alpine;
+	Alpine.plugin(persist);
+	Alpine.start();
+</script>
+
+</body>
+</html>

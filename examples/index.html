@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alpinejs import webcomponents</title>
+	<style>
+		[x-cloak] {
+			opacity: 0;
+		}
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		main {
+			padding: 20px;
+		}
+		button {
+			background-color: red;
+		}
+	</style>
+	<script type="module">
+		import AlpineWebComponent from '/dist/esm.min.js';
+		AlpineWebComponent('alpine-navigation', '/_components/Navigation.html');
+	</script>
+</head>
+
+<body>
+	<main>
+		<h1>Alpinejs import webcomponents</h1>
+		<alpine-navigation x-data="{current: 'top'}"></alpine-navigation>
+	</main>
+
+	<script type="module">
+		import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/+esm';
+		window.Alpine = Alpine;
+		Alpine.start();
+	</script>
+</body>
+</html>
