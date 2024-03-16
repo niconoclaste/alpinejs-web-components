@@ -2,40 +2,38 @@
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/niconoclaste/alpinejs-web-components)
 
-This package is a tiny script who loads code from a regular HTML file, convert it to a `web-component` and make it usable anywhere in your pages with reactivity and logic powered by `AlpineJS`.
+This package is a tiny script who loads the content a regular HTML file, convert it to a `web-component` and make it usable anywhere in your pages with reactivity and logic powered by `AlpineJS`.
 
 <a name="motivations"></a>
-# Motivations
-[AlpineJS](https://github.com/alpinejs/alpine/) is a wonderfull framework but it lacks a way to define reusable components and templates across all pages.
+## Motivations
+[AlpineJS](https://github.com/alpinejs/alpine/) is a wonderful framework, but it lacks a way to define reusable components and templates across all pages.
 
-Browser's native [webComponents API](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) is also great, but it lacks a simple way to add reactivity and logic to web components.
+Browser's native [webComponents API](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) is also great, but adding logic and reactivity takes a lot of time and efforts.
 
-So why not combining thoses two technologies and get the best of this two worlds ?
+So why not combining those two technologies and get the best of these two worlds ?
 
-With this package you will be able to create reusable HTML components with AlpineJS logic and reactivity, use scoped styles, predefine generic templates, or render your components just in time `without build phase`.
+With this package you will be able to create `reusable HTML web-components` with `AlpineJS logic and reactivity`, use `scoped styles`, predefine generic templates `without build phase`.
 
 <a name="limitations"></a>
-# Limitations
-This package is not able to do much more than what AlpineJS and webComponents API are able to do.
+## Limitations
+This package is not able to do much more than what AlpineJS and web-components API are able to do.
 
 Not using a build phase means that everything is done browser side, which may leads to flash rendering effects and layout shifts.
 
-This package does not pretend to be a replacement for JS frameworks and if you already use a build phase, a server side technology, a static site generator or HTMX in you project, it makes literally no sense to use this package.
+This package does not pretend to be a replacement for JS frameworks and if you already use a build phase, a server side technology, a static site generator or HTMX in your project, it makes literally no sense to use this package.
 
-More of all the above, this package is not meant to be use in production.
+More of all the above, this package is not (yet) meant to be use in production.
 
 
-<a name="todo"></a>
-# To do before v.1
-
+### To do before v.1
 - regular function to Class ? Object ?
-- parameters to object
-- make everyting optional
+- Parameters to object
+- make everything optional
 - examples to codepen
 
 
 <a name="installation"></a>
-# Installation
+## Installation
 
 Via `<script>` tag
 
@@ -98,6 +96,8 @@ Insert the following at the end of the `<body>` tag:
 <a name="define"></a>
 ## Define a component
 
+Create a `.html` file and add HTML, CSS and JS
+
 <cite>`/webcomponents/Button.html`</cite>
 ```html
 <button class="myButton">Click me</button>
@@ -115,12 +115,14 @@ Insert the following at the end of the `<body>` tag:
   })
 </script>
 ```
-This file is a regular HTML file and it does not need AlpineJS to be rendered.<br>But without AlpineJS it make no sense to use this package.
+This file is a regular HTML file, and it would be great if the above code worked as expected.<br>
+But this won't work with web-component.
 
-This is the AlpineJS equivalent :
+You will need to use AlpineJS magic to make it work without additional boilerplate code.
 
+<cite>`/webcomponents/Button.html`</cite>
 ```html
-<button class="myButton" @click="console.log('clicked !')">Click me</button>
+<button @click="console.log('clicked !')">Click me</button>
 
 <style>
   .myButton {
@@ -129,7 +131,7 @@ This is the AlpineJS equivalent :
 </style>
 ```
 
-The rest of this docs will be written using AlpineJS
+<br>
 
 <a name="import"></a>
 ## Import a component
@@ -139,25 +141,26 @@ The rest of this docs will be written using AlpineJS
 <!-- via <script> tag -->
 <script>
 
-  AlpineWebComponent('button-webcomponent', '/webcomponents/Button.html');
+  AlpineWebComponent('alpine-button', '/webcomponents/Button.html');
 
 </script>
 
 <!-- via esm -->
 <script type="module">
 
-  AlpineWebComponent('button-webcomponent', '/webcomponents/Button.html');
+  AlpineWebComponent('alpine-button', '/webcomponents/Button.html');
 
 </script>
 ```
 After the import of this package, call the `AlpineWebComponent()` function with 2 required arguments :
-- `the name of your component`.<br>This will define the HTML tag name for you component.<br>
-According to the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements#name" target="_blank">specs</a> : <cite>Web components name must start with a lowercase letter and contain a hyphen.</cite>
+1. `the name of your component`.<br>
+This will define the HTML tag name for you web-component.<br>
+According to the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements#name" target="_blank">web-components specs</a> : <cite>Web components name must start with a lowercase letter and contain a hyphen.</cite>
 
-- `the path of your component`.<br>This is the path to your component's HTML file.
+2. `the path of your component`.<br>This is the path to your web-component's HTML file.<br>
 You can generate different components with different names from the same HTML.<br>Your component name and your component HTML file name does not need to be the same.
 
-The rest of this docs will be written using ESM.
+>NOTE : The rest of these docs will be written using ESM.
 
 
 <a name="consume"></a>
@@ -167,20 +170,21 @@ The rest of this docs will be written using ESM.
 ```html
 <main x-data>
 
-  <button-webcomponent></button-webcomponent>
+  <alpine-button></alpine-button>
 
 </main>
 ```
-Just add your `web-component` inside `<body>`
+Just add your `web-component` tag inside the `<body>`
 
 The tag name will be the first argument that you defined in the `AlpineWebComponent()` function.
 
-Web-components can not be auto-closed.<br>
-This mean that writing only `<button-webcomponent />` in your HTML will not work.<br>You need to explecitily open AND close your HTML tag : `<button-webcomponent> (...) </button-webcomponent>`.
+>Web-components can not be auto-closed.<br>
+This mean that writing only `<alpine-button />` in your HTML will not work.<br>
+You need to explicitly open AND close your HTML tag : `<alpine-button> (...) </alpine-button>`.
 
 In order to use AlpineJS you need to set `x-data` directive to your component or to a parent.
 
-Your component is not fully powered by AlpineJS and can consume all AlpineJS methods and directives and makes it REALLY easy to use !
+Your `web-component` is now `fully powered by AlpineJS` and can consume all AlpineJS methods and directives !
 
 <details>
   <summary>Full code :</summary>
@@ -199,7 +203,7 @@ Your component is not fully powered by AlpineJS and can consume all AlpineJS met
 
     <main x-data>
 
-      <button-webcomponent></button-webcomponent>
+      <alpine-button></alpine-button>
 
     </main>
     
@@ -209,7 +213,7 @@ Your component is not fully powered by AlpineJS and can consume all AlpineJS met
       import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/dist/esm.min.js';
 
       // import component
-      AlpineWebComponent('button-webcomponent', '/webcomponents/Button.html');
+      AlpineWebComponent('alpine-button', '/webcomponents/Button.html');
 
       // import AlpineJS
       import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/+esm';
@@ -227,7 +231,7 @@ Your component is not fully powered by AlpineJS and can consume all AlpineJS met
 </details>
 
 <br>
-You can separate your js code from your HTML
+You can also separate your common JS code from your HTML :
 
 <cite>`/js/script.js`</cite>
 ```js
@@ -238,8 +242,8 @@ import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-compon
 window.AlpineWebComponent = AlpineWebComponent;
 
 // import directly the common components you want to use on all pages
-AlpineWebComponent('header-webcomponent', '/webcomponents/Header.html');
-AlpineWebComponent('footer-webcomponent', '/webcomponents/Footer.html');
+AlpineWebComponent('alpine-header', '/webcomponents/Header.html');
+AlpineWebComponent('alpine-footer', '/webcomponents/Footer.html');
 
 // import AlpineJS
 import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/+esm';
@@ -249,7 +253,6 @@ window.Alpine = Alpine;
 
 // Start AlpineJS
 Alpine.start();
-
 ```
 
 <cite>`/index.html`</cite>
@@ -259,29 +262,33 @@ Alpine.start();
   <head>
     <title>INDEX</title>
   </head>
-  <body>
+  <body x-data>
 
-    <header-webcomponent></header-webcomponent>
+    <alpine-header></alpine-header>
 
     <main>
 
-      <button-webcomponent></button-webcomponent>
+      <alpine-button></alpine-button>
 
     </main>
 
-    <footer-webcomponent></footer-webcomponent>
+    <alpine-footer></alpine-footer>
 
-    <!-- global imports -->
+    <!-- common js code and imports -->
     <script type="module" src="/js/script.js"></script>
 
     <!-- local imports -->
     <script type="module">
-      AlpineWebComponent('button-webcomponent', '/webcomponents/Button.html');
+      AlpineWebComponent('alpine-button', '/webcomponents/Button.html');
     </script>
   </body>
 </html>
 
 ```
+
+>NOTE : The rest of these docs will be written without AlpineJS or AlpineWebComponent common imports.
+
+<br>
 
 <a name="shadow"></a>
 ## Shadow DOM
@@ -289,19 +296,21 @@ By default, web-components generated with `AlpineWebComponent()` are returned wi
 
 Add the `shadow` attribute to your web-component tag to add a shadow DOM with `mode: "open"`.
 
-<cite>`/index.html`</cite><br>
+<cite>`/index.html`</cite>
 ```html
 <alpine-button shadow></alpine-button>
 ```
+
+The HTML in Your component will not be accessible by regular scripts.
+But it changes nothing for AlpineJS who will work the same with or without shadow DOM.
 
 <br>
 
 <a name="css"></a>
 ## Scoped CSS
-By adding a shadow DOM, your component's CSS are now scoped to the component.<br>
-The CSS defined inside your component will not affect the rest of your HTML and the styles defined outside your component will not affect your component.
+By adding a shadow DOM to your component, the CSS written inside your component are now fully `scoped` to your web-component.
 
-<cite>`/components/AlpineButton.html`</cite><br>
+<cite>`/webcomponents/Button.html`</cite>
 ```html
 <button @click="console.log('clicked !')">Click me</button>
 
@@ -316,15 +325,20 @@ The CSS defined inside your component will not affect the rest of your HTML and 
   }
 </style>
 ```
+<details>
+  <summary>More about web-component and CSS</summary>
+
+The HTML tag you create for your web component is not a regular tag and the browser renders it by default as an `inline` element. 
 
 You can style the component's root tag from the inside by using the `:host` CSS pseudo-class.
->The HTML tag you create for your web component is not a regular tag and the browser renders it by default as an `inline` element. 
 
-In the shadow DOM you can't use the `:root` pseudo-class (witch stands for the `<html>` element) and the `:host` pseudo-class (which stands for your `component HTML tag`) is only available in a shadow DOM context.
+> The `:root` pseudo-class (which refers for the document `<html>` tag) is not available in the shadow DOM.
 
->If you use the `:root` pseudo-class in a non shadow DOM component, the `AlpineWebComponent()` function will change it to your component tag.
+> The `:host` pseudo-class (which refers to your `web-component` tag) is only available in the shadow DOM.
 
-For example if you define a `alpine-button` component without Shadow DOM and use `:host` in your component's CSS, `:host { ... }` will be changed to `alpine-button { ... }`
+If you use the `:root` pseudo-class in a non-shadow DOM component, the `AlpineWebComponent()` function will change it to your component tag.<br>
+For example if you define an `alpine-button` component without Shadow DOM and use `:host` in your component's CSS,<br>
+ `:host { ... }` will be changed to `alpine-button { ... }`
 
 ```html
 <style>
@@ -340,58 +354,35 @@ For example if you define a `alpine-button` component without Shadow DOM and use
   }
 </style>
 ```
->This will not make your CSS scoped, but you can limit the scope of the CSS defined in your component by nesting your CSS to the component root with `:host`
 
-```html
-<style>
-  :host {
-    display: block;
-    background-color: yellow;
-    button {
-      color: red;
-    }
-  }
+<br>
 
-  /* will be returned : */
-  alpine-button {
-    display: block;
-    background-color: yellow;
-    button {
-      color: red;
-    }
-  }
+>NOTE : You cannot nest your CSS inside a `:root` pseudo-class if you use `shadow DOM`.
 
-  /* which is equivalent to : */
-  alpine-button {
-    display: block;
-    background-color: yellow;
-  }
-  alpine-button button {
-    color: red;
-  }
-</style>
-```
->Note that this will not prevent your element to be styled from the outside.<br>The only way to prevent this is to use shadow DOM.<br>
-Without shadow DOM, your CSS will be added to the `<head>` element.<br>
+</details>
+
+<br>
+
+> NOTE : Without shadow DOM, your CSS will be automatically appended to your page `<head>`.
 
 <br>
 
 <a name="props"></a>
 ## Props
-You can pass `scoped props` or `global props` to your component using regular AlpineJS `x-data`.
+You can pass `props` (data) to your component just by using regular AlpineJS `x-data`.
 
-<cite>`/index.html`</cite><br>
+<cite>`/index.html`</cite>
 ```html
 <main x-data="{ global: 'I am a global prop' }">
 
-  <alpine-button x-data="{ scoped: 'I am a scoped prop' }"></alpine-button>
+  <alpine-button x-data="{ scoped: 'I am a scoped prop' }">></alpine-button>
 
 </main>
 
 ```
 <br>
 
-<cite>`/components/AlpineButton.html`</cite><br>
+<cite>`/webcomponents/Button.html`</cite>
 ```html
 <div x-data="{ local: 'I am a local prop'}">
 
@@ -419,7 +410,7 @@ These props are just AlpineJS reactive data who can be updated from the componen
 
 <br>
 
-<cite>`/index.html`</cite><br>
+<cite>`/index.html`</cite>
 ```html
 <main x-data="{ counter: 0 }">
 
@@ -427,22 +418,24 @@ These props are just AlpineJS reactive data who can be updated from the componen
 
   <alpine-button></alpine-button>
 
+  <button @click="counter--">DECREMENT</button>
+
 </main>
 ```
 <br>
 
-<cite>`/components/AlpineButton.html`</cite><br>
+<cite>`/webcomponents/Button.html`</cite>
 ```html
-<button @click="counter ++">INCREMENT</button>
+<button @click="counter++">INCREMENT</button>
 ```
 
 <br>
 
 <a name="emits"></a>
 ## Emits
-You can emit custom events from your component by using AlpineJS `$dispatch` and listen to it from the parent by using AlpineJS ` x-on: / @: ` event listener.
+You can emit custom events from your component by using [AlpineJS magic displatch](https://alpinejs.dev/magics/dispatch) `$dispatch` and listen to it from the parent by using AlpineJS ` x-on: / @: ` event listener.
 
-<cite>`/index.html`</cite><br>
+<cite>`/index.html`</cite>
 ```html
 <main x-data @foo="console.log($event.detail.message)">
 
@@ -452,7 +445,7 @@ You can emit custom events from your component by using AlpineJS `$dispatch` and
 ```
 <br>
 
-<cite>`/components/AlpineButton.html`</cite><br>
+<cite>`/webcomponents/Button.html`</cite>
 ```html
 <button @click="$dispatch('foo', { message: 'Hello Papa!' })">
   Say something to the parent
@@ -465,39 +458,37 @@ You can emit custom events from your component by using AlpineJS `$dispatch` and
 <a name="slots"></a>
 ## Slots
 
-Slots works like regular web-components slots.
-But slots elements will be returned without the `<slot>` tag.
+Slots works like regular [web-components slots](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots).
 
-
-<cite>`/components/AlpineButton.html`</cite><br>
+<cite>`/webcomponents/Button.html`</cite>
 ```html
 <button @click="console.log('thank you !')">
-
   <slot name="text"></slot>
-
 </button>
 ```
 <br>
 
-<cite>`/index.html`</cite><br>
+>NOTE : the `<slot>` element in your web-component will be replaced by the node you provided.
+
+<cite>`/index.html`</cite>
 ```html
 <alpine-button>
-
-  <span slot="text">Click Me !</span>
-
+  <span slot="text">Click me please !</span>
 </alpine-button>
 
-<!-- Will be returned as : -->
+<!-- Will be rendered : -->
 <alpine-button>
 
   <button @click="console.log('thank you !')">
 
-    <span slot="text">Click Me !</span>
+    <span slot="text">Click me please !</span>
 
   </button>
 
 </alpine-button>
 ```
+
+
 
 <br>
 
@@ -505,13 +496,14 @@ But slots elements will be returned without the `<slot>` tag.
 ## Components nesting
 
 You can nest components and, for example, define a component who includes other components.<br>
-All the components must be defined in your (parent) index.html file.
+> NOTE : You cannot define a component inside another component.<br>
+You need to define all the components in your (parent) index.html `<script>` tag or in your global JS file.
 
-<cite>`/components/AlpineHeader.html`</cite><br>
+<cite>`/webcomponents/Header.html`</cite>
 ```html
-<header x-data>
+<header>
 
-  <alpine-nav shadow></alpine-nav>
+  <alpine-nav></alpine-nav>
   
   <h1 x-text="title"></h1>
 
@@ -519,9 +511,9 @@ All the components must be defined in your (parent) index.html file.
 ```
 <br>
 
-<cite>`/components/AlpineNav.html`</cite><br>
+<cite>`/webcomponents/Navigation.html`</cite>
 ```html
-<nav x-data>
+<nav>
   <ul>
     <li>
       <a href="/" :class="current === 'top' ? 'current' : ''">TOP</a>
@@ -539,55 +531,24 @@ All the components must be defined in your (parent) index.html file.
   }
 </style>
 ```
+
 <br>
 
-<cite>`/index.html`</cite><br>
+<cite>`/js/script.js`</cite>
+```js
+AlpineWebComponent('alpine-header', '/webcomponents/Header.html');
+AlpineWebComponent('alpine-nav', '/webcomponents/Navigation.html');
+```
+
+<br>
+
+<cite>`/index.html`</cite>
 ```html
 <main x-data="{ title: 'TOP', current: 'top' }">
 
   <alpine-header></alpine-header>
 
-  <!-- rest of your code -->
-
 </main>
-
-<script type="module">
-
-  // import alpinejs-web-components
-  import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/dist/esm.min.js';
-
-  // define header component
-  AlpineWebComponent('alpine-header', '/components/AlpineHeader.html');
-
-  // define nested navigation component
-  AlpineWebComponent('alpine-nav', '/components/AlpineNav.html');
-
-  // import AlpineJS
-  import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/+esm';
-
-  // add AlpineJS to the window object
-  window.Alpine = Alpine;
-
-  // Start AlpineJS
-  Alpine.start();
-
-</script>
-```
-<br>
-
-<cite>`/about/index.html`</cite><br>
-```html
-<body x-data="{ title: 'ABOUT', current: 'about' }">
-
-  <alpine-header></alpine-header>
-
-  <!-- rest of your code -->
-
-  <script type="module">
-    // same as '/index.html' -->
-  </script>
-  
-</body>
 ```
 
 <br>
@@ -595,34 +556,48 @@ All the components must be defined in your (parent) index.html file.
 <a name="persist"></a>
 ## Persist state
 
-Your can use AlpineJS persist plugin to keep the state of a data across pages.
+You can use AlpineJS [persist plugin](https://alpinejs.dev/plugins/persist) to keep the state of a data across pages, web-components and even if you close your browser.
 
-<cite>`/about/index.html`</cite><br>
+<cite>`/js/script.js`</cite>
+```js
+// import Persist plugin
+import { persist } from 'https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/+esm';
+
+// import AlpineJS
+import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/+esm';
+
+// add AlpineJS to the window object
+window.Alpine = Alpine;
+
+// Add persist plugin to AlpineJS
+Alpine.plugin(persist);
+
+// Start AlpineJS
+Alpine.start();
+```
+
+<cite>`/index.html`</cite>
 ```html
-<body x-data="{ counter : $persist(0) }">
+<main x-data="{ counter : $persist(0) }">
 
   <p x-text="counter"></p>
 
   <alpine-button></alpine-button>
 
-  <script type="module">
-    // import alpinejs-web-components
-    import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/dist/esm.min.js';
+</main>
+```
 
-    // define button component
-    AlpineWebComponent('alpine-button', '/components/AlpineButton.html');
+<br>
 
-    // Import Alpine Plugins
-    import { persist } from 'https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/+esm';
+<cite>`/webcomponents/Button.html`</cite>
+```html
+<button @click="counter ++">
+  INCREMENT
+</button>
 
-    // import AlpineJS
-    import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/+esm';
+<button @click="counter --">
+  DECREMENT
+</button>
 
-    // add AlpineJS to the window object
-    window.Alpine = Alpine;
-
-    // Start AlpineJS
-    Alpine.start();
-  </script>
-</body>
+<p x-text="counter"></p>
 ```
