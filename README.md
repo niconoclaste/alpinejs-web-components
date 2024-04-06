@@ -2,7 +2,7 @@
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/niconoclaste/alpinejs-web-components)
 
-This package is a tiny script who loads the content a regular HTML file, convert it to a `web-component` and make it usable anywhere in your pages with reactivity and logic powered by `AlpineJS`.
+This package is a tiny script who loads the content of a regular HTML file, convert it to a `web-component` and make it usable anywhere in your pages with reactivity and logic powered by `AlpineJS`.
 
 <a name="motivations"></a>
 ## Motivations
