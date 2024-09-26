@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Alpinejs import webcomponents</title>
+  <meta charset="UTF-8">
 
 	<script type="module">
     // Import alpinejs-web-components
 		import { AlpineWebComponent } from '/dist/esm.js';
 
-    // Define layout
+    
+    AlpineWebComponent('site-head', '/_components/Head.html');
+
+		// Define layout
     AlpineWebComponent('alpine-layout', '/_layouts/Layout.html');
     
     // Define components
@@ -25,6 +28,7 @@
 </head>
 
 <body x-data="{ number: $persist(0), title: 'LAYOUT (esm)', current: 'layout-esm'}" x-cloak>
+	<site-head>TEST Alpinejs import webcomponents</site-head>
   <alpine-layout>
     <template slot="layout">
       <p>aaaaa</p>

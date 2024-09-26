@@ -1,0 +1,38 @@
+<nav>
+  <ul>
+    <li>
+      <a href="/" :class="current === 'top' ? 'current' : ''">TOP</a>
+    </li>
+    <li>
+      <a href="/about/" :class="current === 'about' ? 'current' : ''">ABOUT</a>
+    </li>
+  </ul>
+</nav>
+
+<style>
+:host {
+	display: block;
+	nav {
+		display: block;
+		ul {
+			display: flex;
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			align-items: center;
+			justify-content: center;
+			gap: 20px;
+			li {
+				text-align: center;
+				a {
+					color: #fff;
+					&.current {
+						pointer-events: none;
+						opacity: 0.5;
+					}
+				}
+			}
+		}
+	}
+}
+</style>

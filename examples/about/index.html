@@ -19,9 +19,15 @@
 	</style>
 </head>
 
-<body>
+<body x-data="{ title: 'ABOUT', current: 'about', year : $persist(2024) }">
+	<alpine-header></alpine-header>
+	<main>
+		<p x-text="year"></p>
+		<alpine-button></alpine-button>
+	</main>
+	<alpine-footer></alpine-footer>
 
-	<alpine-button x-data></alpine-button>
+
 
 	<!-- common js code and imports -->
 	<script type="module" src="/js/script.js"></script>
