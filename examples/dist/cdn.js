@@ -62,15 +62,6 @@
             });
             document.head.appendChild(linkToAppend);
           });
-          const metas = componentRoot.querySelectorAll("meta");
-          metas.forEach((meta) => {
-            const metaToAppend = document.createElement("meta");
-            const attributes = meta.getAttributeNames();
-            attributes.forEach((name) => {
-              metaToAppend.setAttribute(name, meta.getAttribute(name));
-            });
-            document.head.appendChild(metaToAppend);
-          });
           const slots = componentRoot.querySelectorAll("[slot]");
           slots.forEach((slot) => {
             console.log(slot.tagName);

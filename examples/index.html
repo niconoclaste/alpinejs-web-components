@@ -5,31 +5,36 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alpinejs import webcomponents</title>
 	<style>
-		html, body {
-			margin: 0;
+		[x-cloak] {
+			opacity: 0;
 		}
 		body {
-			display: grid;
-			grid-template-rows: auto 1fr auto;
-			min-height: 100vh;
+			margin: 0;
+			padding: 0;
 		}
 		main {
-			padding: 0 20px;
+			padding: 20px;
+		}
+		button {
+			background-color: red;
 		}
 	</style>
+	<script type="module">
+		import AlpineWebComponent from '/dist/esm.min.js';
+		AlpineWebComponent('alpine-navigation', '/_components/Navigation.html');
+	</script>
 </head>
 
 <body>
+	<main>
+		<h1>Alpinejs import webcomponents</h1>
+		<alpine-navigation x-data="{current: 'top'}"></alpine-navigation>
+	</main>
 
-	<alpine-button x-data></alpine-button>
-
-	<!-- common js code and imports -->
-	<script type="module" src="/js/script.js"></script>
-
-	<!-- local imports -->
-	<script type="module" defer>
-		AlpineWebComponent('alpine-button', '/webcomponents/Button.html');
+	<script type="module">
+		import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/+esm';
+		window.Alpine = Alpine;
+		Alpine.start();
 	</script>
-	
 </body>
 </html>
