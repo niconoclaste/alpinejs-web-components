@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
-<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js" export="jsExported"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js" export="swiperReady"></script>
 
 
 <h2></h2>
@@ -19,7 +19,8 @@
 </div>
 
 <script export>
-	window.addEventListener('jsExported', () => {
+	window.addEventListener('swiperReady', () => {
+		console.log('swiperReady !')
 		var swiper = new Swiper('.swiper', {
 			slidesPerView: 4,
 			spaceBetween: 30,
@@ -59,7 +60,6 @@
 
 	.swiper {
 		width: 100%;
-		height: 100%;
 		height: 300px;
 	}
 

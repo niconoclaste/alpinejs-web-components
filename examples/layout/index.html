@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alpinejs import webcomponents</title>
-  <!-- alpinejs-web-components  -->
-  <script src="/dist/cdn.min.js"></script>
+
+  <!-- import alpinejs-web-components  -->
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs-web-components/dist/cdn.min.js"></script>
 
   <!-- Alpine Plugins -->
   <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
   
   <!-- Alpine Core -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
   <style>
     button {
       background-color: green;
@@ -38,9 +38,6 @@
     AlpineWebComponent('alpine-nav', '/_components/Navigation.html');
     AlpineWebComponent('alpine-button', '/_components/Button.html');
     AlpineWebComponent('alpine-footer', '/_components/Footer.html');
-
   </script>
-
-
 </body>
 </html>

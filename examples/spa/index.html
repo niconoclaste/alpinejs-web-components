@@ -2,52 +2,69 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alpinejs import webcomponents</title>
-	<style>
-		[x-cloak] {
-			opacity: 0;
-		}
-		body {
-			margin: 0;
-			padding: 0;
-		}
-		main {
-			padding: 20px;
-		}
-		button {
-			background-color: red;
-		}
-	</style>
-	<script type="module">
-		import AlpineWebComponent from '/dist/esm.min.js';
-		AlpineWebComponent('alpine-header', '/_components/Header.html');
-		AlpineWebComponent('alpine-nav', '/_components/Navigation.html');
-		AlpineWebComponent('alpine-button', '/_components/Button.html');
-	</script>
+  <style>
+    [x-cloak] {
+      opacity: 0;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    main {
+      padding: 20px;
+    }
+    button {
+      background-color: red;
+    }
+  </style>
+  <script type="module">
+    import AlpineWebComponent from '/dist/esm.min.js';
+    AlpineWebComponent('alpine-header', '/_components/Header.html');
+    AlpineWebComponent('alpine-nav', '/_components/Navigation.html');
+    AlpineWebComponent('alpine-button', '/_components/Button.html');
+  </script>
 </head>
 
-<body x-data="{ number: $persist(0), title: 'SPA (esm)', current: 'spa'}" x-cloak>
-	<alpine-header shadow></alpine-header>
+<body x-data="{ state: $persist('first'), title: 'SPA (esm)', current: 'spa'}" x-cloak>
+  <alpine-header shadow></alpine-header>
 
-	<main x-data="{visible: false}">
-		<h1 x-text="title"></h1>
+  <main>
+    <h1 x-text="title"></h1>
 
-		<p x-text="number"></p>
-		<button @click="visible = !visible">SHOW / HIDE COMPONENT</button>
+    <template x-if="state === 'first'">
+      <div>
+        <h2>FIRST CONTENT</h2> 
+        <button @click="state = 'second'">NEXT CONTENT</button>
+      </div>
+    </template>
 
-		<template x-if="visible">
-			<alpine-button></alpine-button>
-		</template>
+    <template x-if="state === 'second'">
+      <div>
+        <h2>SECOND CONTENT</h2>
+        <p>You can refresh the page, the current state is still displayed !</p>
+        <button @click="state = 'first'">PREVIOUS CONTENT</button>
+        <button @click="state = 'third'">NEXT CONTENT</button>
+      </div>
+    </template>
 
-	</main>
+    <template x-if="state === 'third'">
+      <div>
+        <h2>THIRD CONTENT</h2> 
+        <p>You can refresh the page, the current state is still displayed !</p>
+        <button @click="state = 'second'">PREVIOUS CONTENT</button>
+      </div>
+    </template>
 
-	<script type="module">
-		import { persist } from 'https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/+esm';
-		import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/+esm';
-		window.Alpine = Alpine;
-		Alpine.plugin(persist);
-		Alpine.start();
-	</script>
+  </main>
+
+  <script type="module">
+    import { persist } from 'https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/+esm';
+    import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/+esm';
+    window.Alpine = Alpine;
+    Alpine.plugin(persist);
+    Alpine.start();
+  </script>
 </body>
 </html>

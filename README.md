@@ -86,9 +86,8 @@ Insert the following at the end of the `<body>` tag:
   <li><a href="#persist">Persist state</a></li>
   <li><a href="#library">Third-party libraries in your components</a></li>
   <li><a href="#islands">Include components just in time</a></li>
-  <li><a href="#templates">Templates</a></li>
-  <li><a href="#head">Head ??</a></li>
-  <li><a href="#spa">SPA ??</a></li>
+  <li><a href="#layouts">Layouts</a></li>
+  <li><a href="#spa">SPA</a></li>
   <li><a href="#layout-flash">Prevent layout flash effect</a></li>
 </ul>
 
@@ -601,3 +600,205 @@ Alpine.start();
 
 <p x-text="counter"></p>
 ```
+
+
+<a name="library"></a>
+## Third-party libraries in your components
+
+If the library is loaded locally (on the same server) there is nothing special to do,<br>
+but if you use a CDN to load the library, you will need to add some parameters in order to make it work.
+
+In order to use (call) third-party library inside your component, you need to export the external js or CSS.
+
+The web-component will not load the javascript file, the file will be loaded when rendered on the main index.html file.<br>
+But the javascript that call the library wont work if the library itself is not downloaded and ready yet. 
+
+In your component you can add a export parameter to the distant hosted javascript file with a value corresponding to a custom event who will be called when the distant javascript is fully loaded and ready to use.
+
+You will also need to export the js who intentiate the library.
+
+For example, you can define a `Swiper` component this way :
+
+<cite>`/webcomponents/Swiper.html`</cite>
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js" export="swiperLoaded"></script>
+
+<div class="swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">Slide 1</div>
+    <div class="swiper-slide">Slide 2</div>
+    <div class="swiper-slide">Slide 3</div>
+    <div class="swiper-slide">Slide 4</div>
+    <div class="swiper-slide">Slide 5</div>
+    <div class="swiper-slide">Slide 6</div>
+    <div class="swiper-slide">Slide 7</div>
+  </div>
+  <div class="swiper-pagination"></div>
+</div>
+
+<script export>
+  window.addEventListener('swiperLoaded', () => {
+    const swiper = new Swiper('.swiper', {
+      slidesPerView: 4,
+      spaceBetween: 30,
+      centeredSlides: true,
+      loop: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true
+      }
+    });
+  })
+</script>
+```
+
+Note: the CSS you load are automatically added to your main index.html file `<head>` so there is no need to explicitely export it.
+
+<a name="islands"></a>
+## Include components just in time (like Astro's islands)
+
+The trick is to include your component in a `<template>` tag and use Alpine.js `x-if` to with a variable to switch according to a certain event.
+
+The HTML (or webcomponent) who is inside a `<template>` tag is not rendered by the browser until its contents are extracted with js and appended to the dom.
+
+That is what alpine.js do with the `x-if` directive.<br>
+In conlusion, the not parsed HTML is imported on load to the `<template>` tag, but wont be rendered until a certain event or action.
+This event / action could be :<br>
+・ window.onload
+・ scroll into view
+・ click on a button 
+・ a mouse hover
+etc.
+
+With the Swiper example it could look like that :
+
+<cite>`/index.html`</cite>
+```html
+<main x-data="{swiperVisible: false}">
+
+  <button @click="swiperVisible = !swiperVisible">SHOW / HIDE SWIPER</button>
+
+  <template x-if="swiperVisible">
+    <alpine-swiper></alpine-swiper>
+  </template>
+</main>
+
+<script type="module">
+  AlpineWebComponent('alpine-swiper', '/webcomponents/Swiper.html');
+</script>
+```
+
+Note: with Alpine.js, a `<template>` tag must have only one direct child.<br>
+If you need to display more nodes, you will need to wrap them into a `<div>` or another root node tag.
+
+
+
+<a name="layouts"></a>
+## Layouts
+
+You can define common layout templates and use them on your pages.<br>
+It is, in fact, just a component who includes other components and a slot element.
+
+
+<cite>`/_layouts/Layout.html`</cite>
+```html
+<!-- LAYOUT TEMPLATE -->
+<alpine-header shadow></alpine-header>
+<main>
+  <h1 x-text="title"></h1>
+  <slot name="layout"></slot>
+</main>
+
+<alpine-footer shadow></alpine-footer>
+
+<!-- COMMON CSS FROM CDN -->
+<link export rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+
+<!-- COMMON LOCAL DEFINED CSS -->
+<style export>
+[x-cloak] {
+  opacity: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+  transition: opacity 0.2s 0.4s;
+}
+:host {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+main {
+  padding: 20px;
+}
+</style>
+```
+
+Just like nested components, you must define your components in the destination html file, of via a javascript file.
+
+<cite>`/js/script.js`</cite>
+```js
+// import alpinejs-web-components
+import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/dist/esm.min.js';
+
+// add alpinejs-web-components to the window object
+window.AlpineWebComponent = AlpineWebComponent;
+
+// import directly the common components you want to use on all pages
+	AlpineWebComponent('alpine-layout', '/_layouts/Layout.html');
+	AlpineWebComponent('alpine-header', '/_components/Header.html');
+	AlpineWebComponent('alpine-nav', '/_components/Navigation.html');
+	AlpineWebComponent('alpine-button', '/_components/Button.html');
+	AlpineWebComponent('alpine-footer', '/_components/Footer.html');
+
+// import AlpineJS
+import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/+esm';
+
+// add AlpineJS to the window object
+window.Alpine = Alpine;
+
+// Start AlpineJS
+Alpine.start();
+```
+
+<cite>`/index.html`</cite>
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alpinejs layout example</title>
+</head>
+
+<body x-data="{ number: $persist(0), title: 'LAYOUT'}" x-cloak>
+  <alpine-layout>
+    <template slot="layout">
+      <p x-text="title"></p>
+
+      <alpine-button shadow></alpine-button>
+
+    </template>
+
+  </alpine-layout>
+
+  <!-- common js code and imports -->
+  <script type="module" src="/js/script.js"></script>	
+</body>
+</html>
+```
+
+
+<a name="spa"></a>
+## SPA
+
+Your can create a spa like web application by switching differents components put inside different `<template>` tags.
+
+You can keep a track the current state by using AlpineJS [persist plugin](https://alpinejs.dev/plugins/persist)
+
+For example you can use a `layout compontent` for your common parts, and in your main `/index.html` file you can switch between the 
