@@ -1,57 +1,50 @@
-export default function AlpineWebComponent (componentName, componentPath) {
+export default function AlpineWebComponent(tag, path) {
 	class CustomComponent extends HTMLElement {
-		constructor(){
+		constructor(shadow, root, alpineJS) {
 			super();
+
 			// check if custom component has [shadow] attribute
-			if(this.getAttribute('shadow') !== null){
+			if (this.getAttribute('shadow') !== null) {
 				this.attachShadow({ mode: 'open' });
+				this.shadow = true;
+				this.root = this.shadowRoot;
+			} else {
+				this.shadow = false;
+				this.root = this;
 			}
 
+			// check if Alpine.js is available
+			this.alpineJS = window.Alpine ? window.Alpine : false;
 		}
-		disconnectedCallback() {
-			console.log(componentName+ ': disconnected');
-		}
+
+		disconnectedCallback() { }
+
 		connectedCallback() {
-			console.log(componentName+ ': connected');
-			// console.log(componentName);
-			// console.log(Alpine);
-			
-			let hasShadow = null;
-			let componentRoot = this;
-			if(this.shadowRoot === null){
-				hasShadow = false;
-			}else {
-				hasShadow = true;
-				componentRoot = this.shadowRoot;
-			}
-
 			// fetch component raw HTML (as text)
-			fetch(componentPath)
-			.then(response => response.text())
-			.then(html => {
+			fetch(path).then(response => response.text()).then(html => {
 
-				// insert raw HTML inside a template and get HTML as node element
+				// insert fetched raw HTML inside a template and get the HTML as node elements
 				const component = document.createElement('template');
 				component.innerHTML = html;
-				componentRoot.appendChild(component.content.cloneNode(true));
+				this.root.appendChild(component.content.cloneNode(true));
 
-				if(!hasShadow){
+				if (!this.shadow) {
 					// replace [:host] in CSS by component-name if no shadow dom
-					const styles = componentRoot.querySelectorAll('style');
+					const styles = this.root.querySelectorAll('style');
 					styles.forEach(style => {
 						let shadowStyle = style.innerText;
-							if(shadowStyle.includes(':host')){
-							shadowStyle = shadowStyle.replaceAll(':host', componentName);
+						if (shadowStyle.includes(':host')) {
+							shadowStyle = shadowStyle.replaceAll(':host', tag);
 							style.remove();
 							const softScopedStyle = document.createElement('style');
 							softScopedStyle.textContent = shadowStyle;
-							componentRoot.appendChild(softScopedStyle);
+							this.root.appendChild(softScopedStyle);
 						}
 					})
 				}
 
 				// add global scripts to the DOM
-				const scripts = componentRoot.querySelectorAll('script[export]');
+				const scripts = this.root.querySelectorAll('script[export]');
 				scripts.forEach(script => {
 					const scriptToExport = document.createElement('script');
 					const attributes = script.getAttributeNames().filter(attr => attr !== 'export');
@@ -59,50 +52,46 @@ export default function AlpineWebComponent (componentName, componentPath) {
 						scriptToExport.setAttribute(name, script.getAttribute(name));
 					})
 					scriptToExport.textContent = script.innerHTML;
-					componentRoot.appendChild(scriptToExport);
-					scriptToExport.onload = function(){
-						const event = new CustomEvent(script.getAttribute('export'), {bubbles : true, composed : true});
+					this.root.appendChild(scriptToExport);
+					scriptToExport.onload = function () {
+						const event = new CustomEvent(script.getAttribute('export'), { bubbles: true, composed: true });
 						window.dispatchEvent(event);
 					}
 					script.remove();
 				})
 
-	
-				// add global styles to the DOM
-				const links = componentRoot.querySelectorAll('link[export]');
-				links.forEach(link => {
-					const linkToAppend = document.createElement('link');
-					const attributes = link.getAttributeNames().filter(attr => attr !== 'export');
-					attributes.forEach(name => {
-						linkToAppend.setAttribute(name, link.getAttribute(name));
-					})
-					document.head.appendChild(linkToAppend);
-				})
 
-
-				// replace the slots elements by their inner HTML
-				const slots = componentRoot.querySelectorAll('[slot]');
+				// extract slots inner HTML
+				const slots = this.root.querySelectorAll('[slot]');
 				slots.forEach(slot => {
-					console.log(slot.tagName);
 					const name = slot.getAttribute('slot');
-					const slotDist = componentRoot.querySelector('slot[name="'+name+'"]');
-					if(slot.tagName === 'TEMPLATE'){
+					const slotDist = this.root.querySelector('slot[name="' + name + '"]');
+					if (slot.tagName === 'TEMPLATE') {
 						slotDist.after(slot.content.cloneNode(true));
-					}else {
+					} else {
 						slotDist.after(slot.cloneNode(true));
 					}
 					slot.remove();
 					slotDist.remove();
 				})
 
+				// add slots HTML to the shadow DOM
+				if (this.shadow) {
+					const slotsElements = this.root.querySelectorAll('slot');
+					slotsElements.forEach(slot => {
+						const slotDist = slot.assignedNodes()[0];
+						slot.before(slotDist);
+						slot.remove();
+					})
+				}
 
-				// add to Alpine tree if shadow
-				if(hasShadow){
-					Alpine.initTree(componentRoot);
+				// add to Alpine tree if shadow dom and if Alpine is available
+				if (this.shadow && this.alpineJS) {
+					this.alpineJS.initTree(this.root);
 				}
 			})
 		}
 	}
-	
-	customElements.define(componentName, CustomComponent);
+
+	customElements.define(tag, CustomComponent);
 }
