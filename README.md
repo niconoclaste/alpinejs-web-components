@@ -36,7 +36,7 @@ Insert the following at the end of the `<head>` tag:
 ```html
 <!-- import alpinejs-web-components  -->
 <script src="https://cdn.jsdelivr.net/npm/alpinejs-web-components/dist/cdn.min.js"></script>
-		
+    
 <!-- import Alpine.js -->
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs/dist/cdn.min.js"></script>
 ```
@@ -47,20 +47,20 @@ Insert the following before the `</body>` closing tag:
 ```html
 <script type="module">
 
-	// import alpinejs-web-components
-	import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/+esm';
+  // import alpinejs-web-components
+  import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/+esm';
 
-	// add AlpineWebComponent to the window object
-	window.AlpineWebComponent = AlpineWebComponent;
+  // add AlpineWebComponent to the window object
+  window.AlpineWebComponent = AlpineWebComponent;
 
-	// import Alpine.js
-	import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs/+esm';
+  // import Alpine.js
+  import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs/+esm';
 
-	// add Alpine.js to the window object
-	window.Alpine = Alpine;
+  // add Alpine.js to the window object
+  window.Alpine = Alpine;
 
-	// Start Alpine.js
-	Alpine.start();
+  // Start Alpine.js
+  Alpine.start();
 
 </script>
 ```
@@ -70,19 +70,19 @@ Insert the following before the `</body>` closing tag:
 <a name="usage"></a>
 # Usage
 <ul>
-	<li><a href="#define">Define a Web Component</a></li>
-	<li><a href="#import">Import a Web Component</a></li>
-	<li><a href="#consume">Consume a Web Component</a></li>
-	<li><a href="#separate">Global imports in a separate js file</a></li>
-	<li><a href="#shadow-css">Shadow DOM & scoped CSS</a></li>
-	<li><a href="#props">Props</a></li>
-	<li><a href="#slots">Slots</a></li>
-	<li><a href="#nesting">Components nesting</a></li>
-	<li><a href="#layouts">Layouts</a></li>
-	<li><a href="#emits">Emits</a></li>
-	<li><a href="#persist">Persist state</a></li>
-	<li><a href="#libraries">Third-party libraries</a></li>
-	<li><a href="#islands">Import components just in time</a></li>
+  <li><a href="#define">Define a Web Component</a></li>
+  <li><a href="#import">Import a Web Component</a></li>
+  <li><a href="#consume">Consume a Web Component</a></li>
+  <li><a href="#separate">Global imports in a separate js file</a></li>
+  <li><a href="#shadow-css">Shadow DOM & scoped CSS</a></li>
+  <li><a href="#props">Props</a></li>
+  <li><a href="#slots">Slots</a></li>
+  <li><a href="#nesting">Components nesting</a></li>
+  <li><a href="#layouts">Layouts</a></li>
+  <li><a href="#emits">Emits</a></li>
+  <li><a href="#persist">Persist state</a></li>
+  <li><a href="#libraries">Third-party libraries</a></li>
+  <li><a href="#islands">Import components just in time</a></li>
 </ul>
 
 <br>
@@ -98,17 +98,17 @@ Create a `.html` file and add some add HTML, CSS and JS
 <button class="myButton">Click me</button>
 
 <style>
-	.myButton {
-		background: yellow;
-		color: red;
-	}
+  .myButton {
+    background: yellow;
+    color: red;
+  }
 </style>
 
 <script>
-	const myButton = document.querySelector('.myButton');
-	myButton.addEventListener('click', (evt) => {
-		alert('clicked !');
-	})
+  const myButton = document.querySelector('.myButton');
+  myButton.addEventListener('click', (evt) => {
+    alert('clicked !');
+  })
 </script>
 ```
 This file is a regular HTML file, and it would be great if the above js code worked as expected as if.<br>
@@ -122,10 +122,10 @@ But if you use Alpine.js and AlpineWebComponents the following will work as expe
 <button class="myButton" @click="alert('clicked !')">Click me</button>
 
 <style>
-	.myButton {
-		background: yellow;
-		color: red;
-	}
+  .myButton {
+    background: yellow;
+    color: red;
+  }
 </style>
 ```
 
@@ -139,12 +139,12 @@ After the import of this package and Alpine.js, call the `AlpineWebComponent()` 
 Via `<script>` tag (in the `<head>` after importing Alpine.js ) :
 ```html
 <head>
-	(...)
+  (...)
 
-	<!-- import a component -->
-	<script>
-		AlpineWebComponent('alpine-button', '/_components/Button.html');
-	</script>
+  <!-- import a component -->
+  <script>
+    AlpineWebComponent('alpine-button', '/_components/Button.html');
+  </script>
 </head>
 ```
 
@@ -152,10 +152,10 @@ Via `ESM` (after `Alpine.start()`) :
 
 ```html
 <script type="module">
-	(...)
+  (...)
 
-	// import a component
-	AlpineWebComponent('alpine-button', '/_components/Button.html');
+  // import a component
+  AlpineWebComponent('alpine-button', '/_components/Button.html');
 </script>
 ```
 
@@ -186,7 +186,7 @@ Just add your `Web Component` tag anywhere inside the `<body>`
 
 <body>
 
-	<alpine-button></alpine-button>
+  <alpine-button></alpine-button>
 
 </body>
 ```
@@ -211,10 +211,10 @@ Your `Web Component` is now `fully powered by Alpine.js` and can consume all Alp
 <button class="myButton" @click="alert('clicked !')">Click me</button>
 
 <style>
-	.myButton {
-		background: yellow;
-		color: red;
-	}
+  .myButton {
+    background: yellow;
+    color: red;
+  }
 </style>
 ```
 ```html
@@ -222,28 +222,28 @@ Your `Web Component` is now `fully powered by Alpine.js` and can consume all Alp
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Title</title>
+  <title>Title</title>
 </head>
 <body>
 
-	<main x-data>
+  <main x-data>
 
-		<alpine-button></alpine-button>
+    <alpine-button></alpine-button>
 
-	</main> 
+  </main> 
 
-	<script type="module">
+  <script type="module">
 
-		import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/+esm';
-		window.AlpineWebComponent = AlpineWebComponent;
+    import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/+esm';
+    window.AlpineWebComponent = AlpineWebComponent;
 
-		import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs/+esm';
-		window.Alpine = Alpine;
-		Alpine.start();
+    import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs/+esm';
+    window.Alpine = Alpine;
+    Alpine.start();
 
-		AlpineWebComponent('alpine-button', '/_components/Button.html');
+    AlpineWebComponent('alpine-button', '/_components/Button.html');
 
-	</script>
+  </script>
 </body>
 </html>
 ```
@@ -284,27 +284,27 @@ AlpineWebComponent('alpine-footer', '/_components/Footer.html');
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>INDEX</title>
+  <title>INDEX</title>
 </head>
 <body x-data>
 
-	<alpine-header></alpine-header>
+  <alpine-header></alpine-header>
 
-	<main>
+  <main>
 
-		<alpine-button></alpine-button>
+    <alpine-button></alpine-button>
 
-	</main>
+  </main>
 
-	<alpine-footer></alpine-footer>
+  <alpine-footer></alpine-footer>
 
-	<!-- common js code and imports -->
-	<script type="module" src="/js/script.js"></script>
+  <!-- common js code and imports -->
+  <script type="module" src="/js/script.js"></script>
 
-	<!-- local imports -->
-	<script type="module">
-		AlpineWebComponent('alpine-button', '/_components/Button.html');
-	</script>
+  <!-- local imports -->
+  <script type="module">
+    AlpineWebComponent('alpine-button', '/_components/Button.html');
+  </script>
 
 </body>
 </html>
@@ -336,14 +336,14 @@ By adding a shadow DOM to your component, the CSS written inside your Web Compon
 <button @click="alert('clicked !')">Click me</button>
 
 <style>
-	:host {
-		display: block;
-		background-color: yellow;
-	}
-	
-	button {
-		color: red;
-	}
+  :host {
+    display: block;
+    background-color: yellow;
+  }
+  
+  button {
+    color: red;
+  }
 </style>
 ```
 
@@ -369,10 +369,10 @@ For example if you define an `alpine-button` component without Shadow DOM and us
 <!-- /_components/Button.html -->
 
 <style>
-	:host {
-		display: block;
-		background-color: yellow;
-	}
+  :host {
+    display: block;
+    background-color: yellow;
+  }
 </style>
 ```
 will be returned as :
@@ -381,10 +381,10 @@ will be returned as :
 <!-- /index.html -->
 
 <style>
-	alpine-button {
-		display: block;
-		background-color: yellow;
-	}
+  alpine-button {
+    display: block;
+    background-color: yellow;
+  }
 </style>
 ```
 
@@ -409,7 +409,7 @@ You can pass `props` (data) to your component just by using regular Alpine.js `x
 
 <main x-data="{ global: 'I am a global prop' }">
 
-	<alpine-section x-data="{ scoped: 'I am a scoped prop' }"></alpine-section>
+  <alpine-section x-data="{ scoped: 'I am a scoped prop' }"></alpine-section>
 
 </main>
 ```
@@ -419,11 +419,11 @@ You can pass `props` (data) to your component just by using regular Alpine.js `x
 
 <section x-data="{ local: 'I am a local prop'}">
 
-	<h2 x-text="global"></h2>
+  <h2 x-text="global"></h2>
 
-	<button x-text="scoped"></button>
+  <button x-text="scoped"></button>
 
-	<p x-text="local"></p>
+  <p x-text="local"></p>
 
 </section>
 ```
@@ -434,12 +434,12 @@ Will be rendered :
 
 <section>
 
-	<h2>I am a global prop</h2>
+  <h2>I am a global prop</h2>
 
-	<button>I am a scoped prop</button>
+  <button>I am a scoped prop</button>
 
-	<p>I am a local prop</p>
-	
+  <p>I am a local prop</p>
+  
 </section>
 ```
 Theses props are just Alpine.js reactive data who can be updated from inside or outside the component.
@@ -449,11 +449,11 @@ Theses props are just Alpine.js reactive data who can be updated from inside or 
 
 <main x-data="{ counter: 0 }">
 
-	<p x-text="counter"></p>
+  <p x-text="counter"></p>
 
-	<alpine-button></alpine-button>
+  <alpine-button></alpine-button>
 
-	<button @click="counter--">DECREMENT</button>
+  <button @click="counter--">DECREMENT</button>
 
 </main>
 ```
@@ -477,8 +477,8 @@ will be automatically `prepended` to your Web Component html.
 <!-- /index.html -->
 
 <text-component1>
-	<p>one</p>
-	<p>two</p>
+  <p>one</p>
+  <p>two</p>
 </text-component1>
 ```
 ```html
@@ -494,10 +494,10 @@ Will be returned :
 <!-- /index.html -->
 
 <text-component1>
-	<p>one</p>
-	<p>two</p>
-	<p>three</p>
-	<p>four</p>
+  <p>one</p>
+  <p>two</p>
+  <p>three</p>
+  <p>four</p>
 </text-component1>
 ```
 
@@ -507,16 +507,16 @@ you can use `named slots` if you use a shadow DOM or if you want to control wher
 <!-- /index.html -->
 
 <text-component2>
-	<p slot="last">last</p>
-	<p slot="first">first</p>
-	<p slot="middle">middle</p>
+  <p slot="last">last</p>
+  <p slot="first">first</p>
+  <p slot="middle">middle</p>
 </text-component2>
 
 <!-- or -->
 <text-component2 shadow>
-	<p slot="last">last</p>
-	<p slot="first">first</p>
-	<p slot="middle">middle</p>
+  <p slot="last">last</p>
+  <p slot="first">first</p>
+  <p slot="middle">middle</p>
 </text-component2>
 
 ```
@@ -537,21 +537,21 @@ Will be returned :
 <!-- /index.html -->
 
 <text-component2>
-	<p slot="first">first</p>
-	<p>one</p>
-	<p slot="middle">middle</p>
-	<p>two</p>
-	<p slot="last">last</p>
+  <p slot="first">first</p>
+  <p>one</p>
+  <p slot="middle">middle</p>
+  <p>two</p>
+  <p slot="last">last</p>
 </text-component2>
 
 <!-- or -->
 
 <text-component2 shadow>
-	<p slot="first">first</p>
-	<p>one</p>
-	<p slot="middle">middle</p>
-	<p>two</p>
-	<p slot="last">last</p>
+  <p slot="first">first</p>
+  <p>one</p>
+  <p slot="middle">middle</p>
+  <p>two</p>
+  <p slot="last">last</p>
 </text-component2>
 ```
 
@@ -562,12 +562,12 @@ They wont be affected by global styles and will be stylable from the component C
 <!-- /index.html -->
 <style>
 span {
-	color: red;
+  color: red;
 }
 </style>
 
 <text-component3 shadow>
-	<span slot="text">span</span>
+  <span slot="text">span</span>
 </text-component>
 
 <span>another span</span>
@@ -580,7 +580,7 @@ span {
 
 <style>
 span {
-	font-weight: bold;
+  font-weight: bold;
 }
 </style>
 ```
@@ -592,13 +592,13 @@ Will be returned :
 
 <style>
 span {
-	color: red;
+  color: red;
 }
 </style>
 
 <text-component3 shadow>
-	<span slot="text">bold span</span>
-	<!-- this span tag will be bold (not red) -->  
+  <span slot="text">bold span</span>
+  <!-- this span tag will be bold (not red) -->  
 </text-component3>
 
 <span>red span</span>
@@ -620,19 +620,19 @@ You need to define all the components in your (parent) index.html `<script>` tag
 
 <section>
 
-	<alpine-heading shadow></alpine-heading>
+  <alpine-heading shadow></alpine-heading>
 
-	<alpine-text></alpine-text>
+  <alpine-text></alpine-text>
 
 </section>
 
 <style>
-	:host {
-		display: block;
-	}
-	:host + :host {
-		border-top: solid 5px black;
-	}
+  :host {
+    display: block;
+  }
+  :host + :host {
+    border-top: solid 5px black;
+  }
 </style>
 ```
 
@@ -642,9 +642,9 @@ You need to define all the components in your (parent) index.html `<script>` tag
 <h1 x-text="title"></h1>
 
 <style>
-	h1 {
-		font-size: 22px;
-	}
+  h1 {
+    font-size: 22px;
+  }
 </style>
 ```
 
@@ -658,26 +658,26 @@ You need to define all the components in your (parent) index.html `<script>` tag
 <!-- /index.html -->
 
 <alpine-section x-data="{
-	title: 'SECTION 1 TITLE',
-	text: 'Section 1 text'
+  title: 'SECTION 1 TITLE',
+  text: 'Section 1 text'
 }"></alpine-section>
 
 <alpine-section x-data="{
-	title: 'SECTION 2 TITLE',
-	text: 'Section 2 text'
+  title: 'SECTION 2 TITLE',
+  text: 'Section 2 text'
 }"></alpine-section>
 
 <script type="module">
-	import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/+esm';
-	window.AlpineWebComponent = AlpineWebComponent;
+  import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/+esm';
+  window.AlpineWebComponent = AlpineWebComponent;
 
-	import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs/+esm';
-	window.Alpine = Alpine;
-	Alpine.start();
+  import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs/+esm';
+  window.Alpine = Alpine;
+  Alpine.start();
 
-	AlpineWebComponent('alpine-section', '/_components/Section.html');
-	AlpineWebComponent('alpine-heading', '/_components/Heading.html');
-	AlpineWebComponent('alpine-text', '/_components/Text.html');
+  AlpineWebComponent('alpine-section', '/_components/Section.html');
+  AlpineWebComponent('alpine-heading', '/_components/Heading.html');
+  AlpineWebComponent('alpine-text', '/_components/Text.html');
 </script>
 ```
 
@@ -698,9 +698,9 @@ You can use slots to add markup locally.
 <alpine-header shadow></alpine-header>
 
 <main>
-	<h1 x-text="title"></h1>
+  <h1 x-text="title"></h1>
 
-	<slot name="layout"></slot>
+  <slot name="layout"></slot>
 
 </main>
 
@@ -741,24 +741,24 @@ AlpineWebComponent('alpine-footer', '/_components/Footer.html');
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>layout example</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>layout example</title>
 </head>
 
 <body x-data="{ title: 'LAYOUT EXAMPLE'}" x-cloak>
-	<alpine-layout>
+  <alpine-layout>
 
-		<section slot="layout">
+    <section slot="layout">
 
-			<p>Some markup (via slot)</p>
+      <p>Some markup (via slot)</p>
 
-		</section>
+    </section>
 
-	</alpine-layout>
+  </alpine-layout>
 
-	<!-- common js code and imports -->
-	<script type="module" src="/js/script.js"></script>  
+  <!-- common js code and imports -->
+  <script type="module" src="/js/script.js"></script>  
 </body>
 </html>
 ```
@@ -770,22 +770,22 @@ The `<alpine-layout>` part will be rendered :
 
 <alpine-layout>
 
-	<alpine-header shadow></alpine-header>
+  <alpine-header shadow></alpine-header>
 
-	<main>
-		<h1 x-text="title">LAYOUT EXAMPLE</h1>
+  <main>
+    <h1 x-text="title">LAYOUT EXAMPLE</h1>
 
-		<section slot="layout">
+    <section slot="layout">
 
-			<h2>Some markup (via slot)</h2>
+      <h2>Some markup (via slot)</h2>
 
-			<p>another markup (via slot)</p>
+      <p>another markup (via slot)</p>
 
-		</section>
+    </section>
 
-	</main>
+  </main>
 
-	<alpine-footer shadow></alpine-footer>
+  <alpine-footer shadow></alpine-footer>
 
 </alpine-layout>
 ```
@@ -799,13 +799,13 @@ Using the previous layout example :
 
 <alpine-layout>
 
-	<template slot="layout">
+  <template slot="layout">
 
-		<h2>Some markup (via slot)</h2>
+    <h2>Some markup (via slot)</h2>
 
-		<p>another markup (via slot)</p>
+    <p>another markup (via slot)</p>
 
-	</template>
+  </template>
 
 </alpine-layout>
 ```
@@ -817,18 +817,18 @@ Will be rendered :
 
 <alpine-layout>
 
-	<alpine-header shadow></alpine-header>
+  <alpine-header shadow></alpine-header>
 
-	<main>
-		<h1 x-text="title">LAYOUT EXAMPLE</h1>
+  <main>
+    <h1 x-text="title">LAYOUT EXAMPLE</h1>
 
-		<h2>Some markup (via slot)</h2>
+    <h2>Some markup (via slot)</h2>
 
-		<p>another markup (via slot)</p>
+    <p>another markup (via slot)</p>
 
-	</main>
+  </main>
 
-	<alpine-footer shadow></alpine-footer>
+  <alpine-footer shadow></alpine-footer>
 
 </alpine-layout>
 ```
@@ -844,8 +844,8 @@ You can emit custom events from your component by using [Alpine.js magic dispatc
 
 <main x-data @foo="alert($event.detail.message)">
 
-	<alpine-button></alpine-button>
-	
+  <alpine-button></alpine-button>
+  
 </main>
 ```
 
@@ -853,7 +853,7 @@ You can emit custom events from your component by using [Alpine.js magic dispatc
 <!-- /_components/Button.html -->
 
 <button @click="$dispatch('foo', { message: 'Hello Papa!' })">
-	Say something to the parent
+  Say something to the parent
 </button>
 ```
 
@@ -869,32 +869,32 @@ You can use Alpine.js [persist plugin](https://alpinejs.dev/plugins/persist) to 
 
 <main x-data="{ counter : $persist(0) }">
 
-	<p x-text="counter"></p>
+  <p x-text="counter"></p>
 
-	<alpine-button></alpine-button>
+  <alpine-button></alpine-button>
 
 </main>
 
 <script type="module">
-	// import alpinejs-web-components
-	import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/+esm';
-	window.AlpineWebComponent = AlpineWebComponent;
+  // import alpinejs-web-components
+  import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/+esm';
+  window.AlpineWebComponent = AlpineWebComponent;
 
-	// import Persist plugin
-	import { persist } from 'https://cdn.jsdelivr.net/npm/@alpinejs/persist/+esm';
+  // import Persist plugin
+  import { persist } from 'https://cdn.jsdelivr.net/npm/@alpinejs/persist/+esm';
 
-	// import Alpine.js
-	import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs/+esm';
-	window.Alpine = Alpine;
+  // import Alpine.js
+  import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs/+esm';
+  window.Alpine = Alpine;
 
-	// Add persist plugin to Alpine.js
-	Alpine.plugin(persist);
+  // Add persist plugin to Alpine.js
+  Alpine.plugin(persist);
 
-	// Start Alpine.js
-	Alpine.start();
+  // Start Alpine.js
+  Alpine.start();
 
-	// import a Web Component
-	AlpineWebComponent('alpine-button', './_components/Button.html');
+  // import a Web Component
+  AlpineWebComponent('alpine-button', './_components/Button.html');
 </script>
 
 
@@ -904,11 +904,11 @@ You can use Alpine.js [persist plugin](https://alpinejs.dev/plugins/persist) to 
 <!-- /_components/Button.html -->
 
 <button @click="counter ++">
-	INCREMENT
+  INCREMENT
 </button>
 
 <button @click="counter --">
-	DECREMENT
+  DECREMENT
 </button>
 
 <p x-text="counter"></p>
@@ -934,24 +934,24 @@ Consider the following main `/index.html` file importing Swiper.js library JS an
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>import Swiper Web Component</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
-	<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>import Swiper Web Component</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 </head>
 <body>
-	
-	<alpine-swiper></alpine-swiper>
-	
-	<script type="module">
-		import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/+esm';
-		window.AlpineWebComponent = AlpineWebComponent;
-		import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs/+esm';
-		window.Alpine = Alpine;
-		AlpineWebComponent('alpine-swiper', '/_components/Swiper.html');
-		Alpine.start();
-	</script>
+  
+  <alpine-swiper></alpine-swiper>
+  
+  <script type="module">
+    import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/+esm';
+    window.AlpineWebComponent = AlpineWebComponent;
+    import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs/+esm';
+    window.Alpine = Alpine;
+    AlpineWebComponent('alpine-swiper', '/_components/Swiper.html');
+    Alpine.start();
+  </script>
 </body>
 </html>
 ```
@@ -962,31 +962,31 @@ and the following component with the minimum HTML, Javascript and CSS needed for
 <!-- /_components/Swiper.html -->
 
 <div class="swiper">
-	<div class="swiper-wrapper">
-		<div class="swiper-slide">Slide 1</div>
-		<div class="swiper-slide">Slide 2</div>
-		<div class="swiper-slide">Slide 3</div>
-		<div class="swiper-slide">Slide 4</div>
-	</div>
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">Slide 1</div>
+    <div class="swiper-slide">Slide 2</div>
+    <div class="swiper-slide">Slide 3</div>
+    <div class="swiper-slide">Slide 4</div>
+  </div>
 </div>
 
 <script>
 new Swiper('.swiper', {
-	slidesPerView: 2,
-	spaceBetween: 10,
+  slidesPerView: 2,
+  spaceBetween: 10,
 });
 </script>
 
 <style>
 .swiper {
-	height: 300px;
+  height: 300px;
 }
 .swiper-slide {
-	text-align: center;
-	background: #999;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  text-align: center;
+  background: #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
 ```
@@ -1012,31 +1012,31 @@ So the final component will look like this :
 <!-- /_components/Swiper.html -->
 
 <div class="swiper">
-	<div class="swiper-wrapper">
-		<div class="swiper-slide">Slide 1</div>
-		<div class="swiper-slide">Slide 2</div>
-		<div class="swiper-slide">Slide 3</div>
-		<div class="swiper-slide">Slide 4</div>
-	</div>
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">Slide 1</div>
+    <div class="swiper-slide">Slide 2</div>
+    <div class="swiper-slide">Slide 3</div>
+    <div class="swiper-slide">Slide 4</div>
+  </div>
 </div>
 
 <script export>
 new Swiper('.swiper', {
-	slidesPerView: 2,
-	spaceBetween: 10,
+  slidesPerView: 2,
+  spaceBetween: 10,
 });
 </script>
 
 <style>
 .swiper {
-	height: 300px;
+  height: 300px;
 }
 .swiper-slide {
-	text-align: center;
-	background: #999;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  text-align: center;
+  background: #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
 ```
@@ -1051,22 +1051,22 @@ Consider the following main `/index.html` :<br>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>import Swiper Web Component</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>import Swiper Web Component</title>
 </head>
 <body>
-	
-	<alpine-swiper></alpine-swiper>
-	
-	<script type="module">
-		import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/+esm';
-		window.AlpineWebComponent = AlpineWebComponent;
-		import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs/+esm';
-		window.Alpine = Alpine;
-		AlpineWebComponent('alpine-swiper', '/_components/Swiper.html');
-		Alpine.start();
-	</script>
+  
+  <alpine-swiper></alpine-swiper>
+  
+  <script type="module">
+    import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/+esm';
+    window.AlpineWebComponent = AlpineWebComponent;
+    import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs/+esm';
+    window.Alpine = Alpine;
+    AlpineWebComponent('alpine-swiper', '/_components/Swiper.html');
+    Alpine.start();
+  </script>
 </body>
 </html>
 ```
@@ -1080,31 +1080,31 @@ and the following component importing Swiper.js library JS and CSS
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js" export></script>
 
 <div class="swiper">
-	<div class="swiper-wrapper">
-		<div class="swiper-slide">Slide 1</div>
-		<div class="swiper-slide">Slide 2</div>
-		<div class="swiper-slide">Slide 3</div>
-		<div class="swiper-slide">Slide 4</div>
-	</div>
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">Slide 1</div>
+    <div class="swiper-slide">Slide 2</div>
+    <div class="swiper-slide">Slide 3</div>
+    <div class="swiper-slide">Slide 4</div>
+  </div>
 </div>
 
 <script export>
 new Swiper('.swiper', {
-	slidesPerView: 2,
-	spaceBetween: 10,
+  slidesPerView: 2,
+  spaceBetween: 10,
 });
 </script>
 
 <style>
 .swiper {
-	height: 300px;
+  height: 300px;
 }
 .swiper-slide {
-	text-align: center;
-	background: #999;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  text-align: center;
+  background: #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
 ```
@@ -1124,36 +1124,36 @@ Then you can use this custom event name to wait before activate the library.
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js" export="swiperIsReady"></script>
 
 <div class="swiper">
-	<div class="swiper-wrapper">
-		<div class="swiper-slide">Slide 1</div>
-		<div class="swiper-slide">Slide 2</div>
-		<div class="swiper-slide">Slide 3</div>
-		<div class="swiper-slide">Slide 4</div>
-	</div>
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">Slide 1</div>
+    <div class="swiper-slide">Slide 2</div>
+    <div class="swiper-slide">Slide 3</div>
+    <div class="swiper-slide">Slide 4</div>
+  </div>
 </div>
 
 <script export>
 window.addEventListener('swiperIsReady', () => {
 
-	console.log('swiper.js is LOADED and READY to be activated !')
-	
-	new Swiper('.swiper', {
-		slidesPerView: 2,
-		spaceBetween: 10,
-	});
+  console.log('swiper.js is LOADED and READY to be activated !')
+  
+  new Swiper('.swiper', {
+    slidesPerView: 2,
+    spaceBetween: 10,
+  });
 });
 </script>
 
 <style>
 .swiper {
-	height: 300px;
+  height: 300px;
 }
 .swiper-slide {
-	text-align: center;
-	background: #999;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  text-align: center;
+  background: #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
 ```
@@ -1181,11 +1181,11 @@ With the Swiper example it could look like that :
 <!-- /index.html -->
 <main x-data="{swiperIsVisible: false}">
 
-	<button @click="swiperIsVisible = !swiperIsVisible">Connect / Disconnect SWIPER component</button>
+  <button @click="swiperIsVisible = !swiperIsVisible">Connect / Disconnect SWIPER component</button>
 
-	<template x-if="swiperIsVisible">
-		<alpine-swiper></alpine-swiper>
-	</template>
+  <template x-if="swiperIsVisible">
+    <alpine-swiper></alpine-swiper>
+  </template>
 </main>
 ```
 
