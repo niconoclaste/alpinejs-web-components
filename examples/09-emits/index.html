@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>emits (esm)</title>
+</head>
+<body>
+	<main x-data>
+		<h1>emits (esm)</h1>
+
+		<main x-data @foo="alert($event.detail.message)">
+
+			<alpine-button></alpine-button>
+			
+		</main>
+	</main>
+
+	<script type="module">
+		// import alpinejs-web-components
+		import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/+esm';
+		window.AlpineWebComponent = AlpineWebComponent;
+
+		// import Alpine.js
+		import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs/+esm';
+	
+		// add Alpine.js to the window object
+		window.Alpine = Alpine;
+	
+		// Start Alpine.js
+		Alpine.start();
+
+		// import a Web Component
+    AlpineWebComponent('alpine-button', './_components/Button.html');
+	</script>
+
+</body>
+</html>

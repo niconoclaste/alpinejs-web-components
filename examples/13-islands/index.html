@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>islands</title>
+</head>
+<body>
+  
+	<main x-data="{swiperIsVisible: false}">
+
+		<button @click="swiperIsVisible = !swiperIsVisible">Connect / Disconnect SWIPER component</button>
+	
+		<template x-if="swiperIsVisible">
+			<alpine-swiper></alpine-swiper>
+		</template>
+	</main>
+  
+  <script type="module">
+    import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/+esm';
+		window.AlpineWebComponent = AlpineWebComponent;
+    import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs/+esm';
+    window.Alpine = Alpine;
+    AlpineWebComponent('alpine-swiper', './_components/Swiper.html');
+    Alpine.start();
+  </script>
+</body>
+</html>

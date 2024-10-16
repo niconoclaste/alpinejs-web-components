@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>props (esm)</title>
+
+</head>
+<body>
+
+	<main x-data="{ 
+		global: 'I am a global prop',
+		counter: 0 
+	}">
+
+		<alpine-section x-data="{ 
+			scoped: 'I am a scoped prop' 
+		}"></alpine-section>
+	
+		<p x-text="counter"></p>
+
+		<alpine-button></alpine-button>
+
+		<button @click="counter--">DECREMENT</button>
+
+	</main>
+
+	<script type="module">
+		import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/+esm';
+		window.AlpineWebComponent = AlpineWebComponent;
+
+		import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs/+esm';
+		window.Alpine = Alpine;
+		Alpine.start();
+
+    AlpineWebComponent('alpine-section', './_components/Section.html');
+    AlpineWebComponent('alpine-button', './_components/Button.html');
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>library 2 (Swiper)</title>
+</head>
+<body>
+  
+  <alpine-swiper></alpine-swiper>
+  
+  <script type="module">
+    import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/+esm';
+		window.AlpineWebComponent = AlpineWebComponent;
+    import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs/+esm';
+    window.Alpine = Alpine;
+    AlpineWebComponent('alpine-swiper', './_components/Swiper.html');
+    Alpine.start();
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!-- HTML LAYOUT TEMPLATE -->
+<alpine-header shadow></alpine-header>
+
+<main>
+	<h1 x-text="title"></h1>
+
+	<slot name="layout"></slot>
+
+</main>
+
+<alpine-footer shadow></alpine-footer>
+
+<!-- CSS LAYOUT TEMPLATE -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+
+<style>
+body {
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
+	display: grid;
+	grid-template-rows: 1fr;
+	grid-template-columns: 1fr;
+	opacity: 0;
+	transition: opacity 0.4s linear;
+	&:not([x-cloak]){
+		opacity: 1;
+	}
+}
+:host {
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+}
+main {
+	padding: 20px;
+}
+</style>
+

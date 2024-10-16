@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>separated js (esm)</title>
+	<style>
+		body {
+			margin: 0;
+			display: grid;
+			grid-template-rows: auto 1fr auto;
+			min-height: 100vh
+		}
+		main {
+			text-align: center;
+		}
+	</style>
+</head>
+<body x-data>
+	
+	<alpine-header></alpine-header>
+
+	<main>
+		<h1>separated js (esm)</h1>
+
+		<alpine-button></alpine-button>
+
+	</main>
+
+	<alpine-footer></alpine-footer>
+
+	<!-- common js code and imports -->
+	<script type="module" src="./js/script.js"></script>
+
+	<!-- local imports -->
+	<script type="module">
+		AlpineWebComponent('alpine-button', './_components/Button.html');
+	</script>
+
+</body>
+</html>

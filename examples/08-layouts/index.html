@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>layouts (esm)</title>
+</head>
+
+<body x-data="{ title: 'TOP', current: 'top'}" x-cloak>
+  <alpine-layout>
+
+    <template slot="layout">
+
+			<h2>Top page (via slot)</h2>
+
+			<p>another markup (via slot)</p>
+
+    </template>
+
+  </alpine-layout>
+
+	<!-- common js code and imports -->
+	<script type="module" src="/08-layouts/js/script.js"></script>  
+</body>
+</html>

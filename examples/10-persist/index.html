@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>persist state (esm)</title>
+</head>
+<body>
+	<main x-data="{ counter : $persist(0) }">
+
+		<p x-text="counter"></p>
+	
+		<alpine-button></alpine-button>
+	
+	</main>
+
+	<script type="module">
+		// import alpinejs-web-components
+		import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/+esm';
+		window.AlpineWebComponent = AlpineWebComponent;
+
+		// import Persist plugin
+		import { persist } from 'https://cdn.jsdelivr.net/npm/@alpinejs/persist/+esm';
+
+		// import Alpine.js
+		import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs/+esm';
+	
+		// add Alpine.js to the window object
+		window.Alpine = Alpine;
+	
+		// Add persist plugin to Alpine.js
+		Alpine.plugin(persist);
+
+		// Start Alpine.js
+		Alpine.start();
+
+		// import a Web Component
+    AlpineWebComponent('alpine-button', './_components/Button.html');
+	</script>
+
+</body>
+</html>

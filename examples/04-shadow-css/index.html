@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>shadow dom & scoped CSS (esm)</title>
+	<style>
+		h1{
+			text-align: center;
+		}
+		p {
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+
+	<heading-component shadow></heading-component>
+
+
+	<h1>I am a normal h1, global styles are applied.<br>Styles defined inside the Web Component with Shadow DOM are not applied.<br>(I am not blue)</h1>
+
+	<hr>
+
+	<paragraph-component></paragraph-component>
+
+	<p>I am a normal p, global styles applied<br>The styles defined on the Web Component without shadow DOM are also applied <br>(I am blue)</p>
+
+	<script type="module">
+		import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/+esm';
+		window.AlpineWebComponent = AlpineWebComponent;
+
+		import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs/+esm';
+		window.Alpine = Alpine;
+		Alpine.start();
+
+    AlpineWebComponent('paragraph-component', './_components/Paragraph.html');
+    AlpineWebComponent('heading-component', './_components/Heading.html');
+	</script>
+
+</body>
+</html>

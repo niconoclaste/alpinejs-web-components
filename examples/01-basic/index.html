@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>basic (script tag)</title>
+
+	<!-- import alpinejs-web-components  -->
+	<script src="https://cdn.jsdelivr.net/npm/alpinejs-web-components/dist/cdn.min.js"></script>
+		
+	<!-- import AlpineJS -->
+	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs/dist/cdn.min.js"></script>
+
+	<script>
+		// import Web Component
+		AlpineWebComponent('alpine-button', './_components/Button.html');
+	</script>
+	
+</head>
+<body>
+	<main x-data>
+		<h1>basic (script tag)</h1>
+
+		<alpine-button></alpine-button>
+	</main>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>slots (esm)</title>
+
+	<style>
+		span {
+			color: red;
+		}
+	</style>
+</head>
+<body>
+
+	<h2>text-component1</h2>
+	<text-component1>
+		<p>one (prepended automatically)</p>
+		<p>two (prepended automatically)</p>
+	</text-component1>
+
+	<hr>
+
+	<h2>text-component2</h2>
+	<text-component2>
+		<p slot="last">last (slot)</p>
+		<p slot="first">first (slot)</p>
+		<p slot="middle">middle (slot)</p>
+	</text-component2>
+
+	<hr>
+
+	<h2>text-component2 (shadow)</h2>
+	<text-component2 shadow>
+		<p slot="last">last (slot)</p>
+		<p slot="first">first (slot)</p>
+		<p slot="middle">middle (slot)</p>
+	</text-component2>
+
+	<hr>
+
+	<h2>text-component3 (shadow)</h2>
+	<text-component3 shadow>
+		<span slot="text">bold span</span>
+	</text-component3>
+
+	<br>
+
+	<span>red span</span>
+
+	<script type="module">
+		import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/+esm';
+		window.AlpineWebComponent = AlpineWebComponent;
+
+		import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs/+esm';
+		window.Alpine = Alpine;
+		Alpine.start();
+
+    AlpineWebComponent('text-component1', './_components/Text1.html');
+
+    AlpineWebComponent('text-component2', './_components/Text2.html');
+
+    AlpineWebComponent('text-component3', './_components/Text3.html');
+
+	</script>
+
+</body>
+</html>

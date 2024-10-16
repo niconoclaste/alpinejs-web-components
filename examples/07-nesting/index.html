@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>components nesting (esm)</title>
+</head>
+<body>
+	<main>
+
+		<h1>Multiple nested components</h1>
+
+		<alpine-section x-data="{
+			title: 'SECTION 1 TITLE',
+			text: 'Section 1 text'
+		}"></alpine-section>
+
+		<alpine-section x-data="{
+			title: 'SECTION 2 TITLE',
+			text: 'Section 2 text'
+		}"></alpine-section>
+	
+	</main>
+	
+	<script type="module">
+		import AlpineWebComponent from 'https://cdn.jsdelivr.net/npm/alpinejs-web-components/+esm';
+		// import AlpineWebComponent from '/js/test.js';
+		window.AlpineWebComponent = AlpineWebComponent;
+	
+		import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs/+esm';
+		window.Alpine = Alpine;
+		Alpine.start();
+	
+		AlpineWebComponent('alpine-section', './_components/Section.html');
+		AlpineWebComponent('alpine-heading', './_components/Heading.html');
+		AlpineWebComponent('alpine-text', './_components/Text.html');
+	</script>
+
+</body>
+</html>

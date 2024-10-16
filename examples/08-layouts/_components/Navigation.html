@@ -1,0 +1,29 @@
+<nav x-data>
+	<ul>
+		<li><a href="/08-layouts/" :class="current === 'top' ? 'current' : ''">TOP</a></li>
+		<li><a href="/08-layouts/about/" :class="current === 'about' ? 'current' : ''">ABOUT</a></li>
+	</ul>
+</nav>
+
+<style>
+:host {
+	display: block;
+}
+ul {
+	list-style: none;
+	display: inline-flex;
+	gap: 20px;
+	padding: 0;
+	li {
+		a {
+			color: inherit;
+		}
+	}
+}
+.current {
+	pointer-events: none;
+	text-decoration: none;
+	opacity: 0.5;
+}
+
+</style>

@@ -1,0 +1,9 @@
+<div x-data="{ local: 'I am a local prop'}">
+
+  <h2 x-text="global"></h2>
+
+  <button x-text="scoped" @click="alert(`counter : ${counter}`)"></button>
+
+  <p x-text="local"></p>
+
+</div>
